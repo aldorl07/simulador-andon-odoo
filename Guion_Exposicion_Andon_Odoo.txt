@@ -1,0 +1,198 @@
+================================================================================
+GUION DE EXPOSICION ACADEMICA - INGENIERIA INDUSTRIAL
+PROYECTO: Integracion Sistema Andon 4.0 con Odoo ERP (Mantenimiento y Calidad)
+CASO: Fabrica de Galletas Maria E.I.R.L. (Huancayo, Junin - Peru)
+DURACION ESTIMADA: 7 a 10 minutos
+================================================================================
+
+--------------------------------------------------------------------------------
+1. DATOS CLAVE Y METRICAS DE ORO (Tener en mente durante la defensa)
+--------------------------------------------------------------------------------
+- Planta: Fabrica de Galletas Maria E.I.R.L. (Huancayo, Junin).
+- Linea evaluada: Linea Continua L-01 (Sobadora EQ-01 -> Laminadora LAM-01 ->
+  Estampadora -> Horno Continuo HOR-01 -> Faja de Enfriamiento y Empaque).
+- Productos y Tolerancias:
+  * Galleta Maria Tradicional: Espesor 1.8 mm +/- 0.2 mm (Limite Critico > 2.0 mm).
+  * Galleta Integral PAE: Espesor 2.2 mm +/- 0.2 mm (Limite Critico > 2.4 mm).
+
+- Balance Comparativo de KPIs (Diagnostico Inicial vs. Propuesta Implementada):
+  * OEE Global:                 62.4%  ->  73.9%  (Meta del proyecto: 67.6%)
+  * Disponibilidad de Linea:    81.2%  ->  89.6%
+  * Merma de Galleta Horneada:  6.00%  ->  4.12%  (Meta estandar: 3.0%)
+  * Paradas por Atascos/Roturas: 45 min -> 31.1 min / turno de 8h
+  * MTBF (Tiempo Medio Entre Fallas): 160 h -> 288 h (+128 horas de confiabilidad)
+  * MTTR (Tiempo Medio de Reparacion): 8.5 h -> 5.8 h (-31.7% tiempo muerto)
+  * Pareto 80/20: Desgaste de rodamientos y desalineacion de rodillos concentran
+    el 80% de las perdidas de disponibilidad en planta.
+
+================================================================================
+2. ESTRUCTURA DEL GUION DE DEFENSA
+================================================================================
+
+ACTO 1: INTRODUCCION, DIAGNOSTICO Y METODOLOGIA ANTIGRAVITY (1.5 - 2 minutos)
+--------------------------------------------------------------------------------
+(Proyectar la pantalla en Vista Dual en http://localhost:5173 o en Vercel)
+
+"Buenos dias, senores miembros del jurado. El presente proyecto aborda una de las
+problematicas operacionales mas criticas en la industria manufacturera de alimentos:
+la desconexion y retraso de comunicacion entre la deteccion fisica de anomalias en
+planta y los sistemas de gestion empresarial (ERP).
+
+Tomamos como caso de aplicacion la Fabrica de Galletas Maria E.I.R.L., ubicada en
+la ciudad de Huancayo. En el diagnostico inicial de su Linea Continua L-01, registramos
+una Efectividad Global de Equipos (OEE) de apenas 62.4%, penalizada por una
+disponibilidad del 81.2% y una merma de producto horneado que alcanzaba el 6.0%.
+
+El origen del problema residia en que ante cualquier descalibracion micrometrica
+en los rodillos laminadores o sobrecalentamiento en la camara del horno, el reporte
+dependia exclusivamente de la inspeccion visual del operario y de un informe verbal
+posterior. Esto dilataba el Tiempo Medio de Reparacion (MTTR) hasta 8.5 horas,
+generando 45 minutos de paradas no planificadas por turno y toneladas de merma.
+
+Para validar tecnicamente nuestra propuesta de solucion, no nos limitamos a un diseno
+en papel. Desarrollamos un Gemelo Digital interactivo de alta fidelidad utilizando el
+entorno agéntico de desarrollo Google Antigravity. Como ingenieros industriales,
+modelamos los arboles de falla, los limites de control estadistico y la logica de
+disparo del rele, logrando un prototipo 100% funcional en tiempo real que integra
+un Sistema Andon de Planta con el software Odoo ERP."
+
+
+ACTO 2: ARQUITECTURA DE INTEGRACION DE LA INTERFAZ (1 minuto)
+--------------------------------------------------------------------------------
+(Apuntar con el puntero laser a la pantalla dividida al 50%)
+
+"Como pueden observar en la pantalla principal en Vista Dual:
+
+1. A la izquierda se encuentra el MODULO DE PLANTA: Modela el flujo real de las 5
+   estaciones de manufactura (Sobadora EQ-01, Laminadora LAM-01, Estampadora,
+   Horno Continuo HOR-01 y Empaque), equipadas con sensores opticos en vivo y
+   gobernadas por una Torre Semaforica Andon tri-estado con rele de seguridad.
+
+2. A la derecha opera el MODULO ODOO ERP (v17): Una replica fiel del entorno
+   corporativo con modulos de Mantenimiento (GMAO) y Calidad, organizados bajo un
+   Tablero de Ordenes de Trabajo por etapas: 'Nueva Solicitud', 'En Progreso'
+   y 'Reparado / Resuelto'.
+
+3. En el medio, visualizamos el PUENTE DE TRANSMISION IoT: Cualquier evento de
+   parada fisica genera una transmision por protocolos industriales (OPC-UA/API)
+   hacia Odoo, suprimiendo los tiempos muertos de aviso humano."
+
+
+ACTO 3: DEMOSTRACION INTERACTIVA EN VIVO (3 minutos)
+--------------------------------------------------------------------------------
+(Realizar las acciones en el simulador paso a paso frente al jurado)
+
+PASO A: DISPARO DE FALLA CRITICA DE CALIDAD
+* Accion: Presionar el boton:
+  '[Rojo] Falla Critica Calidad: Lamina fuera de espesor (Laminadora)'
+
+"Vamos a simular en vivo una desviacion en la produccion de Galleta Maria Tradicional,
+cuyo espesor nominal es de 1.8 mm con limite superior critico de 2.0 mm.
+
+(Hacer clic en el boton rojo)
+
+Observen la reaccion en cadena de la planta:
+1. El sensor optico de la Laminadora LAM-01 detecta un grosor de 2.18 mm,
+   superando la tolerancia permitida.
+2. El rele de corte actua instantaneamente: DETIENE EL MOTOR DE LA FAJA, se enciende
+   la luz ROJA de la Torre Andon y se activa la alarma sonora industrial.
+3. Se inicia el cronometro de parada en tiempo real para registrar el tiempo muerto.
+4. En el banner superior observamos el envio del paquete de datos, y de manera
+   inmediata, en la columna derecha de Odoo ERP, se crea automaticamente la
+   orden ALT-01 en la etapa 'Nueva Solicitud' con borde rojo parpadeante de alta
+   prioridad."
+
+PASO B: GESTION Y REPARACION EN ODOO ERP
+* Accion: Clic en el boton 'Atender Incidencia' en la tarjeta de Odoo, y luego clic
+  para abrir el modal del formulario.
+
+"El tecnico de mantenimiento y el supervisor de calidad reciben la solicitud
+directamente en su estacion de trabajo sin llamadas ni planillas manuales:
+1. Al presionar 'Atender Incidencia', la orden transiciona a la etapa 'En Progreso'
+   y marca la hora exacta de intervencion.
+2. Al ingresar a la orden, el formulario presenta la estacion precargada (LAM-01),
+   el tipo de incidencia y el tiempo de parada acumulado.
+3. Para asegurar el control de calidad total, el formulario exige registrar la
+   Causa Raiz: seleccionamos 'Desalineacion de rodillos'.
+4. Presionamos 'Autocompletar sugerencia tecnica' para reflejar la accion correctiva:
+   'Calibracion con galgas micrometricas de paralelismo entre cilindros laminadores a 1.80 mm'.
+5. Cuantificamos la merma retenida: apenas 2.8 kg contenidos antes de coccion."
+
+PASO C: CIERRE DE ORDEN Y REARME DEL ANDON
+* Accion: Presionar el boton verde 'Cerrar OT y Rearmar Andon'.
+
+"(Hacer clic en el boton verde)
+
+Al cerrar la orden en Odoo:
+- Se envia la senal de retorno al rele de la linea de produccion.
+- La alarma se silencia, la Torre Andon conmuta de forma automatica a VERDE y la
+  faja transportadora reanuda el avance normal de las galletas.
+- La orden queda archivada en la columna 'Reparado / Resuelto' con trazabilidad completa."
+
+
+ACTO 4: EVALUACION DE IMPACTO Y DASHBOARD DE KPIS (2 minutos)
+--------------------------------------------------------------------------------
+(Hacer clic en la pestana superior: 'Dashboard KPIs')
+
+"El verdadero valor de este desarrollo radica en su impacto medible en los
+indicadores de gestion industrial:
+
+1. MTTR (Tiempo Medio de Reparacion):
+   Se redujo de 8.5 horas a 5.8 horas, logrando un ahorro del 31.7% en tiempos de
+   atencion tecnica gracias a la orden automatica.
+
+2. Disponibilidad Operacional:
+   Aumento de 81.2% a 89.6%, reduciendo las paradas imprevistas de 45 a 31.1 minutos
+   por cada turno de trabajo de 8 horas.
+
+3. Merma de Galleta Horneada:
+   Al detener la linea antes del horno continuo, la merma bajo de 6.0% a 4.12%,
+   evitando el desperdicio de energia termica y materia prima.
+
+4. Efectividad Global de Equipos (OEE):
+   Como resultado conjunto de Disponibilidad, Rendimiento y Calidad, el OEE
+   alcanzo el 73.9%, superando la meta establecida del 67.6%.
+
+5. Diagrama de Pareto Dinamico:
+   Cada orden cerrada alimenta esta matriz en vivo. Demostramos a la gerencia que
+   el Desgaste de Rodamientos y la Desalineacion de Rodillos concentran el 80% de
+   las fallas, justificando la reestructuracion del plan de mantenimiento preventivo."
+
+
+ACTO 5: CONCLUSIONES Y CIERRE (1 minuto)
+--------------------------------------------------------------------------------
+"Senores del jurado, para concluir:
+1. Se demostro que la digitalizacion e interoperabilidad entre el hardware Andon
+   de piso de planta y Odoo ERP elimina por completo la latencia de informacion.
+2. La metodologia de prototipado rapido con Google Antigravity permitio evaluar
+   el comportamiento dinamico de la planta con rigor matematico y funcional.
+3. El proyecto proporciona a Fabrica de Galletas Maria E.I.R.L. una ruta tecnologica
+   viable, de bajo costo y alto retorno economico.
+
+Quedo a su disposicion para sus preguntas y observaciones. Muchas gracias."
+
+================================================================================
+3. BANCO DE PREGUNTAS CLAVE DEL JURADO Y RESPUESTAS ESTRATEGICAS
+================================================================================
+
+P1: ?Por que eligieron Odoo ERP y no desarrollaron un software propio?
+R: "Elegimos Odoo ERP porque es una plataforma estandar en la industria peruana
+con arquitectura modular y soporte API nativo (XML-RPC y REST). Desarrollar un
+software propio desde cero encarece los costos de mantenimiento, licenciamiento
+y soporte, mientras que Odoo permite escalabilidad inmediata con otros modulos
+como Inventarios y Costos de Produccion."
+
+P2: ?Como se sustenta matematicamente el incremento del OEE a 73.9%?
+R: "El OEE se calculo como el producto de Disponibilidad x Rendimiento x Calidad.
+En la linea base: 81.2% (Disp.) x 82.5% (Rend.) x 93.1% (Cal.) = 62.4% OEE.
+Con la automatizacion del Andon y la reduccion del MTTR a 5.8 h, la Disponibilidad
+se elevo a 89.6% y la Calidad mejoro al 95.8% (merma de 4.12%), lo que genera:
+89.6% x 86.0% x 95.8% = 73.9% de OEE final."
+
+P3: ?Detener la faja de golpe ante un defecto no genera riesgo mecanico o termico?
+R: "Excelente observacion. En el diseno de control industrial, el rele aplica
+un frenado con rampa de desaceleracion en las estaciones 1 a 3 para evitar atascos
+de masa, mientras que en la zona del horno continuo HOR-01 se activa una velocidad
+minima de purga para que ninguna unidad quede expuesta a calor estatico, previniendo
+riesgos de ignicion o deformacion de rodillos."
+================================================================================
