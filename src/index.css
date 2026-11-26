@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --odoo-purple: #714B67;
+    --odoo-purple-dark: #5a3a52;
+    --odoo-teal: #017E84;
+    --odoo-teal-dark: #00666b;
+    --odoo-bg: #F0F2F5;
+  }
+
+  body {
+    background-color: #0f172a;
+    color: #e2e8f0;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom industrial animations */
+@keyframes conveyor-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100px); }
+}
+
+@keyframes pulse-glow-red {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.9), 0 0 35px rgba(239, 68, 68, 0.6);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 5px rgba(239, 68, 68, 0.4), 0 0 10px rgba(239, 68, 68, 0.2);
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulse-glow-amber {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.9), 0 0 30px rgba(245, 158, 11, 0.6);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 5px rgba(245, 158, 11, 0.4), 0 0 10px rgba(245, 158, 11, 0.2);
+    opacity: 0.7;
+  }
+}
+
+@keyframes pulse-glow-green {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.8), 0 0 30px rgba(34, 197, 94, 0.5);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.5), 0 0 15px rgba(34, 197, 94, 0.3);
+    opacity: 0.85;
+  }
+}
+
+@keyframes signal-transmit {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes relay-blink {
+  0%, 100% { opacity: 1; filter: brightness(1.2); }
+  50% { opacity: 0.3; filter: brightness(0.8); }
+}
+
+.animate-pulse-glow-red {
+  animation: pulse-glow-red 1s infinite ease-in-out;
+}
+
+.animate-pulse-glow-amber {
+  animation: pulse-glow-amber 1.5s infinite ease-in-out;
+}
+
+.animate-pulse-glow-green {
+  animation: pulse-glow-green 2s infinite ease-in-out;
+}
+
+.animate-relay-blink {
+  animation: relay-blink 0.8s infinite ease-in-out;
+}
+
+.animate-signal-pulse {
+  animation: signal-transmit 1.8s infinite linear;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
